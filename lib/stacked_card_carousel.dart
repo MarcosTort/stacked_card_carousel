@@ -38,6 +38,7 @@ class StackedCardCarousel extends StatefulWidget {
     bool applyTextScaleFactor = true,
     PageController? pageController,
     OnPageChanged? onPageChanged,
+    double? cardTopSpacing,
   })  : assert(items.isNotEmpty),
         _items = items,
         _type = type,
@@ -45,6 +46,7 @@ class StackedCardCarousel extends StatefulWidget {
         _spaceBetweenItems = spaceBetweenItems,
         _applyTextScaleFactor = applyTextScaleFactor,
         _pageController = pageController ?? _defaultPageController,
+        cardTopSpacing = cardTopSpacing ?? 20,
         _onPageChanged = onPageChanged;
 
   final List<Widget> _items;
@@ -54,6 +56,7 @@ class StackedCardCarousel extends StatefulWidget {
   final bool _applyTextScaleFactor;
   final PageController _pageController;
   final OnPageChanged? _onPageChanged;
+  final double cardTopSpacing;
 
   @override
   _StackedCardCarouselState createState() => _StackedCardCarouselState();
@@ -139,7 +142,7 @@ class _StackedCardCarouselState extends State<StackedCardCarousel> {
               scale = 0.95 + (factor * 0.1 / 2);
             }
             return Positioned.fill(
-              top: -position + (20.0 * item.key),
+              top: -position + (widget.cardTopSpacing * item.key),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Wrap(
@@ -166,7 +169,7 @@ class _StackedCardCarouselState extends State<StackedCardCarousel> {
 /// To allow all gestures detections to go through
 /// https://stackoverflow.com/questions/57466767/how-to-make-a-gesturedetector-capture-taps-inside-a-stack
 class ClickThroughStack extends Stack {
-  ClickThroughStack({required List<Widget> children})
+  const ClickThroughStack({required List<Widget> children})
       : super(children: children);
 
   @override

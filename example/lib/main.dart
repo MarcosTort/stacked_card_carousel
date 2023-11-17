@@ -55,6 +55,7 @@ class MyHomePage extends StatelessWidget {
       ),
       body: StackedCardCarousel(
         items: fancyCards,
+        cardTopSpacing: 100,
       ),
     );
   }
@@ -85,7 +86,7 @@ class FancyCard extends StatelessWidget {
             ),
             Text(
               title,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             OutlinedButton(
               child: const Text("Learn more"),
