@@ -136,21 +136,14 @@ class _StackedCardCarouselState extends State<StackedCardCarousel> {
             );
           case StackedCardCarouselType.cardsStack:
           default:
-            double scale = 1.0;
-            if (item.key - _pageValue < 0) {
-              final double factor = 1 + (item.key - _pageValue);
-              scale = 0.95 + (factor * 0.1 / 2);
-            }
+           
             return Positioned.fill(
               top: -position + (widget.cardTopSpacing * item.key),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Wrap(
                   children: <Widget>[
-                    Transform.scale(
-                      scale: scale,
-                      child: item.value,
-                    ),
+                    item.value,
                   ],
                 ),
               ),
