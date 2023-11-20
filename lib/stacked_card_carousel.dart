@@ -1,6 +1,5 @@
 library stacked_card_carousel;
 
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -110,25 +109,16 @@ class _StackedCardCarouselState extends State<StackedCardCarousel> {
         }
         switch (widget._type) {
           case StackedCardCarouselType.fadeOutStack:
-            double opacity = 1.0;
-            double scale = 1.0;
-            if (item.key - _pageValue < 0) {
-              final double factor = 1 + (item.key - _pageValue);
-              opacity = factor < 0.0 ? 0.0 : pow(factor, 1.5).toDouble();
-              scale = factor < 0.0 ? 0.0 : pow(factor, 0.1).toDouble();
-            }
+            
             return Positioned.fill(
               top: -position,
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Wrap(
                   children: <Widget>[
-                    Transform.scale(
-                      scale: scale,
-                      child: Opacity(
-                        opacity: opacity,
-                        child: item.value,
-                      ),
+                    Opacity(
+                      opacity: 1,
+                      child: item.value,
                     ),
                   ],
                 ),
@@ -136,7 +126,6 @@ class _StackedCardCarouselState extends State<StackedCardCarousel> {
             );
           case StackedCardCarouselType.cardsStack:
           default:
-           
             return Positioned.fill(
               top: -position + (widget.cardTopSpacing * item.key),
               child: Align(
